@@ -1,0 +1,88 @@
+use hr;
+
+-- ============================================================================================================================
+-- TASK-1:-Find the count of the all employees in the organization
+-- ============================================================================================================================
+
+select count(employee_id)
+ as 'Total Employees' 
+ from employees;
+ 
+-- ============================================================================================================================
+-- TASK-2:- Find department_id wise count of employees in the organization
+-- ============================================================================================================================
+select department_id, 
+count(department_id) 
+from employees 
+group by department_id;
+
+-- ============================================================================================================================
+-- TASK-3:- Find firstname lastname and salaries of those employees whose salaries greater than $6,000
+-- ============================================================================================================================
+
+select first_name, last_name, salary 
+from employees 
+where salary>6000;
+
+-- ============================================================================================================================
+-- TASK-4:- Determine the count of employees who are earning salary greater than $20,000
+-- ============================================================================================================================
+
+select count(salary)
+from employees 
+where salary>20000;
+
+-- ============================================================================================================================
+-- TASK-5:- List the details of those employees who get a commission to decide the percentage of bonus they receive
+-- ============================================================================================================================
+
+select * from employees where commission_pct>0;
+
+-- ============================================================================================================================
+-- TASK-6:- The invite will adress the employees with their full name
+-- ============================================================================================================================
+select concat(first_name, last_name),commission_pct from employees where commission_pct>0;
+
+-- ============================================================================================================================
+-- TASK-7:- Fetch the following details of employees who gets the commission
+-- ============================================================================================================================
+
+select employee_id, 
+concat(first_name,last_name)as'Employee full name',
+email, phone_number 
+from employees 
+where commission_pct>0;
+
+-- ============================================================================================================================
+-- TASK-8:- Identify top 3 department ID that have highest total salary of employees
+-- ============================================================================================================================
+select department_id,sum(salary) 
+from employees 
+group by department_id 
+order by sum(salary) desc 
+limit 3;
+
+-- ============================================================================================================================
+-- TASK-9:- List the details of employees from the it dept
+-- ============================================================================================================================
+select department_id, department_name from departments where department_name='IT';
+select * from employees where department_id=60;
+
+-- ============================================================================================================================
+-- TASK-10:- Find the count of all the employees in IT dept and their average salary
+-- ============================================================================================================================
+
+select count(employee_id) from employees where department_id=60;
+select avg(salary)from employees where department_id=60;
+
+-- ============================================================================================================================
+-- TASK-11:- Identify the department IDs and number of employees which range has $7k to $10k
+-- ============================================================================================================================
+
+select department_id, 
+count(employee_id) as 'number of employees' 
+from employees 
+where salary 
+between 7000 and 10000 
+group by department_id;
+-- ============================================================================================================================
